@@ -8,7 +8,7 @@
 #include "Web01_ClientDlg.h"
 #include "afxdialogex.h"
 #define  PORT 5698
-#define  IP "127.0.0.1" 
+#define  IP "112.22.170.88" 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
