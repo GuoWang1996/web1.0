@@ -31,7 +31,7 @@ struct °üÉíÌå
 {
 	char name[30];
 	short age;
-	char desc[1];
+	char desc[10];
 };
 
 struct TPkgInfo

@@ -100,9 +100,16 @@ BOOL HPClient::连接服务器(TCHAR *ip, USHORT port)
 BOOL HPClient::断开连接()
 {
 	if (m_Client->Stop())
+	{
 		Call_输出调试信息("断开连接CONNID:%d \n", m_Client->GetConnectionID());
-	else
-		ASSERT(FALSE);
+	}
+	else 
+	{
+		ASSERT("断开连接失败");
+		return FALSE;
+
+
+	}
 	return TRUE;
 }
 
@@ -123,19 +130,22 @@ BOOL HPClient::发送信息()
 
 	USES_CONVERSION;
 
-	CString strContent="";
+	CString strContent="test";
 	//m_Content.GetWindowText(strContent);
 
 	LPCSTR name = "heart";
 	LPCSTR desc = (LPCTSTR)strContent;
 	int desc_len = (int)strlen(desc) + 1;
-	int body_len = strlen(name)+1;
+	int body_len = sizeof(包身体)+ 1;
 
 	包身体* pBody = (包身体*)malloc(body_len);
+	//将 pBody 指向的内存块的前 body_len 字节都设置为零。
 	memset(pBody, 0, body_len);
+	ZeroMemory(pBody, body_len+1);
 
 	pBody->age = 23;
 	strcpy(pBody->name, name);
+	strcpy(pBody->desc, desc);
 
 	包头 header;
 	header.packageId = ++SEQ;

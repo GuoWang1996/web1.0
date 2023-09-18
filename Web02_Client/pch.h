@@ -12,6 +12,6 @@
 #include "helper.h"
 #endif //PCH_H
 #include <exception>
-#include"../../HPSOCKT/hp-socket-5.8.8-src/Windows/Include/HPSocket/HPSocket.h"
-#include"../../HPSOCKT/hp-socket-5.8.8-src/Windows/Include/HPSocket/HPTypeDef.h"
-#include"../../HPSOCKT/hp-socket-5.8.8-src/Windows/Src/Common/BufferPtr.h"
+#include"../../hp-socket-5.8.8-src/Windows/Include/HPSocket/HPSocket.h"
+#include"../../hp-socket-5.8.8-src/Windows/Include/HPSocket/HPTypeDef.h"
+#include"../../hp-socket-5.8.8-src/Windows/Src/Common/BufferPtr.h"

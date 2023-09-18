@@ -11,9 +11,9 @@
 #include "framework.h"
 #include "helper.h"
 #include <exception>
-#include"../../HPSOCKT/hp-socket-5.8.8-src/Windows/Include/HPSocket/HPSocket.h"
-#include"../../HPSOCKT/hp-socket-5.8.8-src/Windows/Include/HPSocket/HPTypeDef.h"
-#include"../../HPSOCKT/hp-socket-5.8.8-src/Windows/Src/Common/BufferPtr.h"
+#include"../../hp-socket-5.8.8-src/Windows/Include/HPSocket/HPSocket.h"
+#include"../../hp-socket-5.8.8-src/Windows/Include/HPSocket/HPTypeDef.h"
+#include"../../hp-socket-5.8.8-src/Windows/Src/Common/BufferPtr.h"
 #endif //PCH_H
 void Call_输出调试信息(char*pszFormat, ...);
 #define  PORT 5698

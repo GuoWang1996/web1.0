@@ -8,8 +8,8 @@ HPServer::HPServer() : m_Server(this)
 //绑定监听地址前触发 由server组件中间件返回
 EnHandleResult HPServer::OnPrepareListen(ITcpServer* pSender, SOCKET soListen)
 {
-	TCHAR szAddress[100];
-	int iAddressLen = sizeof(szAddress) / sizeof(TCHAR);
+	TCHAR szAddress[100];//本地监听ip地址
+	int iAddressLen = sizeof(szAddress) / sizeof(TCHAR);//地址缓冲区
 	USHORT usPort;
 
 	pSender->GetListenAddress(szAddress, iAddressLen, usPort);
@@ -19,14 +19,15 @@ EnHandleResult HPServer::OnPrepareListen(ITcpServer* pSender, SOCKET soListen)
 EnHandleResult HPServer::OnAccept(ITcpServer* pSender, CONNID dwConnID, UINT_PTR soClient)
 {
 		BOOL bPass = TRUE;
-	TCHAR szAddress[100];
-	int iAddressLen = sizeof(szAddress) / sizeof(TCHAR);
+	TCHAR szAddress[100];//客户端ip地址缓冲区
+	int iAddressLen = sizeof(szAddress) / sizeof(TCHAR);//客户端ip地址缓冲区大小
 	USHORT usPort;
 
 	pSender->GetRemoteAddress(dwConnID, szAddress, iAddressLen, usPort);
-
-	if(bPass) pSender->SetConnectionExtra(dwConnID, new 包信息());
 	Call_输出调试信息("接收到客户端请求 ID:%d IP：%s,端口:%d,地址长度:%d \n", dwConnID, szAddress, usPort, iAddressLen);
+
+	//绑定包信息
+	if(bPass) pSender->SetConnectionExtra(dwConnID, new 包信息());
 	return bPass ? HR_OK : HR_ERROR;
 }
 //数据发送成功触发
@@ -37,8 +38,10 @@ EnHandleResult HPServer::OnSend(ITcpServer* pSender, CONNID dwConnID, const BYTE
 }
 //接收到数据时触发
 EnHandleResult HPServer::OnReceive(ITcpServer* pSender, CONNID dwConnID, int iLength)
-{
+{ 
 	包信息* pInfo = 找到包信息通过CID(pSender, dwConnID);
+
+	//父类强转为子类
 	ITcpPullServer* pServer = ITcpPullServer::FromS(pSender);
 
 	if (pInfo != nullptr)
@@ -71,6 +74,7 @@ EnHandleResult HPServer::OnReceive(ITcpServer* pSender, CONNID dwConnID, int iLe
 
 					required = sizeof(包头);
 				}
+
 
 				pInfo->isHead = !pInfo->isHead;
 				pInfo->packageLength = required;
